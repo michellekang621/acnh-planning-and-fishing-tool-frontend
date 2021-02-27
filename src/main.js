@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import App from './App.vue';
+import store from './store';
 
 import home from './pages/home';
 import login from './pages/login';
@@ -17,6 +19,7 @@ import searchItems from './pages/searchItems';
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 Vue.use(VueMaterial);
 
 const router = new VueRouter({
@@ -60,6 +63,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
+  store: store,
   components: {
     App,
   },

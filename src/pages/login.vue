@@ -20,7 +20,7 @@
 </template>
 <script>
 import axios from 'axios';
-
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: "navbar",
@@ -30,21 +30,23 @@ export default {
       token: null,
   }),
   computed: {
-    routing() {
-      if (this.token) {
-        return '/profile'
-      } else {
-        return ''
-      }
-    },
+    ...mapGetters('user', [
+      'getUsername'
+    ])
   },
   methods: {
+    ...mapActions('user', [
+      'setToken',
+      'setUserByToken',
+    ]),
       async login() {
           const config = {headers: {'Content-Type': 'application/json'}}
           const formData = {'email': this.email, 'password': this.password};
           const response = await axios.post('http://localhost:4000/auth/login', formData, config);
           this.token = response.data;
-          console.log(this.token);
+          this.setToken(this.token.token);
+          await this.setUserByToken()
+          .then(console.log(this.$store.state.user.username));
       },
   }
 };
