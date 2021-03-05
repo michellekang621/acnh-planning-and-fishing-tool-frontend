@@ -1,27 +1,27 @@
 import userDb from '../../api/user-db';
 
 const state = () => ({
+    id: '',
     username: '',
     email: '',
     token: '',
-    goals: {},
+    goals: [],
     loggedIn: false,
 })
 
 const getters = {
-    getUsername(state) {
-        return state.username;
+    getGoalById: (state) => (goalId) => {
+        console.log(state.goals);
+        return state.goals.find(goal => goal._id === goalId);
     }
 }
 
 const mutations = {
-    setToken(state, token) {
-        state.token = token;
-    },
-    setUserByToken(state) {
-        userDb.getUserByToken(state.token)
+    setUserByToken(state, token) {
+        userDb.getUserByToken(token)
         .then(user => {
             console.log(user);
+            state.id = user.data._id;
             state.username = user.data.username;
             state.email = user.data.email;
             state.goals = user.data.goals;
@@ -30,20 +30,41 @@ const mutations = {
         });
         console.log(state);
     },
-    addGoalToGoals(state, goal) {
-        state.goals.push(goal);
+    addGoalByUser(state, goal) {
+        userDb.addGoalByUser(state.id, goal)
+        .then((user) => {
+            console.log(user);
+            userDb.getGoalsByUser(user.data._id)
+            .then((goals) => {
+                state.goals = goals.data;
+                console.log(state.goals);
+            });
+        });
+    },
+    addContentByGoal(state, payload) {
+        userDb.addContentByGoal(state.id, payload.goalId, payload.content)
+        .then((user) => {
+            console.log(user);
+            userDb.getContentsByGoal(state.id, payload.goalId)
+            .then((contents) => {
+                const goal = state.goals.find(goal => goal._id === payload.goalId);
+                console.log(state.goals);
+                goal.contents = contents;
+                console.log(state.goals);
+            })
+        });
     },
 }
 
 const actions = {
-    setToken({commit}, token) {
-        commit('setToken', token);
+    setUserByToken({commit}, token) {
+        commit('setUserByToken', token);
     },
-    setUserByToken({commit}) {
-        commit('setUserByToken');
+    addGoalByUser({commit}, goal) {
+        commit('addGoalByUser', goal);
     },
-    addGoalToGoals({commit}, goal) {
-        commit('addGoalToGoals', {title: goal, contents: []})
+    addContentByGoal({commit}, payload) {
+        commit('addContentByGoal', payload);
     },
 }
 

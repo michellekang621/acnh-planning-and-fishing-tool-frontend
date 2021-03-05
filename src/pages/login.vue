@@ -13,14 +13,14 @@
           <md-input v-model="password"></md-input>
           <span class="md-helper-text">8 character minimum</span>
         </md-field>
-        <md-button class="md-raised" @click="login(); $router.push('profile')">Login</md-button>
+        <md-button class="md-raised" @click="login()">Login</md-button>
       </md-card-content>
     </md-card>
   </div>
 </template>
 <script>
 import axios from 'axios';
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: "navbar",
@@ -29,24 +29,22 @@ export default {
       password: '',
       token: null,
   }),
-  computed: {
-    ...mapGetters('user', [
-      'getUsername'
-    ])
-  },
   methods: {
     ...mapActions('user', [
-      'setToken',
       'setUserByToken',
     ]),
       async login() {
           const config = {headers: {'Content-Type': 'application/json'}}
           const formData = {'email': this.email, 'password': this.password};
-          const response = await axios.post('http://localhost:4000/auth/login', formData, config);
-          this.token = response.data;
-          this.setToken(this.token.token);
-          await this.setUserByToken()
-          .then(console.log(this.$store.state.user.username));
+          await axios.post('http://localhost:4000/auth/login', formData, config)
+          .then((response) => {
+            this.token = response.data;
+            this.setUserByToken(this.token.token);
+            this.$router.push('profile');
+          })
+          .catch(function(error) {
+            return error;
+          });
       },
   }
 };

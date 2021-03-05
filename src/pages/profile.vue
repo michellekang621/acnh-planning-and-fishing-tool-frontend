@@ -1,5 +1,8 @@
 <template>
+<div>
     <p :v-bind="printUsername">{{this.username}}</p>
+    <md-button @click="$router.push('goals-list')">Goals!</md-button>
+</div>
 </template>
 
 <script>

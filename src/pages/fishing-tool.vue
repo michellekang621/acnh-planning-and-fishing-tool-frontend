@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'search-items',
+    name: 'fishing-tool',
     
 }
 </script>

@@ -11,10 +11,11 @@ import home from './pages/home';
 import login from './pages/login';
 import register from './pages/register';
 import profile from './pages/profile';
-import fishingTool from './pages/fishingTool';
-import itemDetails from './pages/itemDetails';
-import listDetails from './pages/listDetails';
-import searchItems from './pages/searchItems';
+import fishingTool from './pages/fishing-tool';
+import itemDetails from './pages/item-details';
+import goalDetails from './pages/goal-details';
+import goalsList from './pages/goals-list';
+import searchItems from './pages/search-items';
 
 Vue.config.productionTip = false
 
@@ -27,35 +28,46 @@ const router = new VueRouter({
   base: '/',
   routes: [
     {
-      path: '/',
+      path: '/home',
+      name: 'home',
       component: home,
     },
     {
       path: '/login',
+      name: 'login',
       component: login,
     },
     {
       path: '/register',
+      name: 'register',
       component: register,
     },
     {
       path: '/profile',
+      name: 'profile',
       component: profile,
     },
     {
       path: '/fishing-tool',
+      name: 'fishing-tool',
       component: fishingTool,
+    },
+    {
+      path: '/goals-list',
+      name: 'goals-list',
+      component: goalsList,
     },
     {
       path: '/item-details/:itemId',
       component: itemDetails,
     },
     {
-      path: '/list-details/:listId',
-      component: listDetails,
+      path: '/goal-details/:goalId',
+      component: goalDetails,
     },
     {
       path: '/search-items',
+      name: 'search-items',
       component: searchItems,
     },
   ]

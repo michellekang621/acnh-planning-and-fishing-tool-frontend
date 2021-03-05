@@ -11,5 +11,10 @@ export default new Vuex.Store({
     },
     plugins: [createPersistedState({
         storage: window.sessionStorage,
+        reducer(val) {
+            return {
+                user: val.user,
+            }
+        }
     })],
 });
