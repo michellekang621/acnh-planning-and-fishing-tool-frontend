@@ -11,8 +11,10 @@ const state = () => ({
 
 const getters = {
     getGoalById: (state) => (goalId) => {
-        console.log(state.goals);
         return state.goals.find(goal => goal._id === goalId);
+    },
+    getContentsByGoalId: (state) => (goalId) => {
+        return state.goals.find(goal => goal._id === goalId).contents;
     }
 }
 
@@ -20,24 +22,19 @@ const mutations = {
     setUserByToken(state, token) {
         userDb.getUserByToken(token)
         .then(user => {
-            console.log(user);
             state.id = user.data._id;
             state.username = user.data.username;
             state.email = user.data.email;
             state.goals = user.data.goals;
             state.loggedIn = true;
-            console.log(state);
         });
-        console.log(state);
     },
     addGoalByUser(state, goal) {
         userDb.addGoalByUser(state.id, goal)
         .then((user) => {
-            console.log(user);
             userDb.getGoalsByUser(user.data._id)
             .then((goals) => {
                 state.goals = goals.data;
-                console.log(state.goals);
             });
         });
     },
@@ -45,12 +42,10 @@ const mutations = {
         userDb.addContentByGoal(state.id, payload.goalId, payload.content)
         .then((user) => {
             console.log(user);
-            userDb.getContentsByGoal(state.id, payload.goalId)
-            .then((contents) => {
-                const goal = state.goals.find(goal => goal._id === payload.goalId);
-                console.log(state.goals);
-                goal.contents = contents;
-                console.log(state.goals);
+            userDb.getGoalsByUser(state.id)
+            .then((goals) => {
+                console.log(goals);
+                state.goals = goals.data;
             })
         });
     },

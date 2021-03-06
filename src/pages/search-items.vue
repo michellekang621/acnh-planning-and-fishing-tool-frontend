@@ -68,7 +68,6 @@ export default {
         this.searchResults = items.data;
       });
       this.$router.push(`search-items?searchString=${this.searchString}`);
-      console.log(this.goals);
     },
   },
 };

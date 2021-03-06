@@ -32,10 +32,7 @@ export default {
             'addGoalByUser'
         ]),
         async addGoal() {
-            console.log(this.id);
-            console.log(this.goals);
             this.addGoalByUser(this.newGoal);
-            console.log(this.goals);
         }
     }
 }

@@ -39,8 +39,7 @@ export default {
       async register() {
           const config = {headers: {'Content-Type': 'application/json'}}
           const formData = {'username': this.username, 'email': this.email, 'password': this.password};
-          const response = await axios.post('http://localhost:4000/auth/register', formData, config);
-          console.log(response.data);
+          await axios.post('http://localhost:4000/auth/register', formData, config);
       }
   }
 };

@@ -15,7 +15,6 @@ export default {
             username: state => state.username,
         }),
         printUsername() {
-            console.log(this.username);
             return this.username;
         }
 

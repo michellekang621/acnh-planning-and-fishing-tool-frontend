@@ -28,8 +28,6 @@ const getContentsByGoal = async (id, goalId) => {
 }
 
 const addContentByGoal = async (id, goalId, content) => {
-    console.log(goalId);
-    console.log(content);
     const contents = await axios.post(`http://localhost:4000/users/${id}/goals/${goalId}/contents`, {
         content: content,
     })

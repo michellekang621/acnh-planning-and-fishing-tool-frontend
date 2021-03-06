@@ -1,7 +1,10 @@
 <template>
   <div>
     <p>Hello!</p>
-    {{ goal().title }}
+    {{ goal.title }}
+    <div v-for="content in goal.contents" :key="content._id">
+      {{content.item.name['name-USen']}}
+    </div>
   </div>
 </template>
 
@@ -12,12 +15,11 @@ export default {
   name: "goal-details",
   computed: {
     ...mapGetters("user", ["getGoalById"]),
-  },
-  methods: {
     goal() {
-        console.log(this.getGoalById(this.$route.params.goalId));
-      return this.getGoalById(this.$route.params.goalId);
-    },
+      const specificGoal = this.getGoalById(this.$route.params.goalId);
+      console.log(specificGoal);
+      return specificGoal;
+    }
   },
 };
 </script>
