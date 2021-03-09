@@ -16,7 +16,22 @@ const getItemsBySearchString = async (searchString) => {
       });
 }
 
+const findAvailableFish = async (hemisphere, month, time) => {
+    return await axios.get('http://localhost:4000/items/search-fish', {
+        params: {
+            hemisphere: hemisphere,
+            month: month,
+            time: time,
+        }
+    })
+    .then((fish) => fish)
+    .catch(function(error) {
+        console.log(error);
+    })
+}
+
 export default {
     getItemById,
     getItemsBySearchString,
+    findAvailableFish,
 }

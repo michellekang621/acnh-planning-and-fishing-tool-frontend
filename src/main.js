@@ -12,6 +12,8 @@ import login from './pages/login';
 import register from './pages/register';
 import profile from './pages/profile';
 import fishingTool from './pages/fishing-tool';
+import bugsTool from './pages/bugs-tool';
+import seaCreaturesTool from './pages/sea-creatures-tool';
 import itemDetails from './pages/item-details';
 import goalDetails from './pages/goal-details';
 import goalsList from './pages/goals-list';
@@ -53,12 +55,23 @@ const router = new VueRouter({
       component: fishingTool,
     },
     {
+      path: '/bugs-tool',
+      name: 'bugs-tool',
+      component: bugsTool,
+    },
+    {
+      path: '/sea-creatures-tool',
+      name: 'sea-creatures-tool',
+      component: seaCreaturesTool,
+    },
+    {
       path: '/goals-list',
       name: 'goals-list',
       component: goalsList,
     },
     {
       path: '/item-details/:itemId',
+      name: 'item-details',
       component: itemDetails,
     },
     {
