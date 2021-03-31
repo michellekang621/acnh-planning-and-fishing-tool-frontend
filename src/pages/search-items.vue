@@ -23,7 +23,6 @@
                   </div>
                 </md-select>
               </md-field>
-              {{item}}
               <md-button @click="addContentByGoal({goalId: selectedValue, content: item})">Add</md-button>
             </div>
             <div v-else>

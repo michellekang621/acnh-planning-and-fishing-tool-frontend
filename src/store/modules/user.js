@@ -32,14 +32,22 @@ const mutations = {
     addGoalByUser(state, goal) {
         userDb.addGoalByUser(state.id, goal)
         .then((user) => {
-            userDb.getGoalsByUser(user.data._id)
-            .then((goals) => {
-                state.goals = goals.data;
-            });
+            state.goals = user.data.goals;
+            // userDb.getGoalsByUser(user.data._id)
+            // .then((goals) => {
+            //     state.goals = goals.data;
+            // });
         });
     },
     addContentByGoal(state, payload) {
         userDb.addContentByGoal(state.id, payload.goalId, payload.content)
+        .then((user) => {
+            console.log(user);
+            state.goals = user.data.goals;
+        });
+    },
+    removeContentByGoal(state, payload) {
+        userDb.removeContentByGoal(state.id, payload.goalId, payload.contentId)
         .then((user) => {
             console.log(user);
             userDb.getGoalsByUser(state.id)
@@ -47,8 +55,12 @@ const mutations = {
                 console.log(goals);
                 state.goals = goals.data;
             })
-        });
+        })
     },
+    logout(state) {
+        sessionStorage.clear();
+        state.loggedIn = false;
+    }
 }
 
 const actions = {
@@ -60,6 +72,12 @@ const actions = {
     },
     addContentByGoal({commit}, payload) {
         commit('addContentByGoal', payload);
+    },
+    removeContentByGoal({commit}, payload) {
+        commit('removeContentByGoal', payload);
+    },
+    logout({commit}) {
+        commit('logout');
     },
 }
 

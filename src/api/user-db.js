@@ -34,6 +34,11 @@ const addContentByGoal = async (id, goalId, content) => {
     return contents;
 }
 
+const removeContentByGoal = async (id, goalId, contentId) => {
+    const contents = await axios.delete(`http://localhost:4000/users/${id}/goals/${goalId}/contents/${contentId}`)
+    return contents;
+}
+
 
 export default {
     getUserByToken,
@@ -41,4 +46,5 @@ export default {
     addGoalByUser,
     getContentsByGoal,
     addContentByGoal,
+    removeContentByGoal,
 }

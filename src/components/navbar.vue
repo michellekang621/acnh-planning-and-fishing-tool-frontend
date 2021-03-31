@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'navbar',
@@ -34,9 +34,9 @@ export default {
         })
     },
     methods: {
-        logout() {
-                sessionStorage.clear();
-        },
+        ...mapActions('user', [
+            'logout',
+        ])
     },
 }
 </script>
