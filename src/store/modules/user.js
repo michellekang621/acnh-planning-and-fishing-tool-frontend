@@ -1,13 +1,17 @@
 import userDb from '../../api/user-db';
 
-const state = () => ({
-    id: '',
-    username: '',
-    email: '',
-    token: '',
-    goals: [],
-    loggedIn: false,
-})
+const getDefaultState = () => {
+    return {
+        id: '',
+        username: '',
+        email: '',
+        token: '',
+        goals: [],
+        loggedIn: false,
+    }
+}
+
+const state = getDefaultState();
 
 const getters = {
     getGoalById: (state) => (goalId) => {
@@ -33,10 +37,6 @@ const mutations = {
         userDb.addGoalByUser(state.id, goal)
         .then((user) => {
             state.goals = user.data.goals;
-            // userDb.getGoalsByUser(user.data._id)
-            // .then((goals) => {
-            //     state.goals = goals.data;
-            // });
         });
     },
     addContentByGoal(state, payload) {
@@ -52,14 +52,14 @@ const mutations = {
             console.log(user);
             userDb.getGoalsByUser(state.id)
             .then((goals) => {
-                console.log(goals);
                 state.goals = goals.data;
             })
         })
     },
     logout(state) {
         sessionStorage.clear();
-        state.loggedIn = false;
+        localStorage.clear();
+        Object.assign(state, getDefaultState());
     }
 }
 

@@ -5,16 +5,13 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
-    user,
+        user,
     },
     plugins: [createPersistedState({
         storage: window.sessionStorage,
-        reducer(val) {
-            return {
-                user: val.user,
-            }
-        }
     })],
 });
+
+export default store;

@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <navbar />
+    <div class="content">
     <router-view :key="$route.path"/>
+    </div>
   </div>
 </template>
 
@@ -23,6 +25,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  /* margin-top: 60px; */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .nav {
+    position: fixed;
+} */
+
+.content {
+  height:100%;
+  overflow: auto;
+  position: relative;
 }
 </style>

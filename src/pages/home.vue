@@ -1,5 +1,6 @@
 <template>
-    <p>hi!</p>
+<div class='bg'>
+</div>
 </template>
 
 <script>
@@ -10,5 +11,12 @@ export default {
 </script>
 
 <style scoped>
+.bg {
+    background-image: url('../assets/acnh-bg.jpg');
+    background-position: top;
+    background-size: cover;
+    height: 100%;
+
+}
 
 </style>

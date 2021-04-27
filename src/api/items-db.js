@@ -30,8 +30,38 @@ const findAvailableFish = async (hemisphere, month, time) => {
     })
 }
 
+const findAvailableBugs = async (hemisphere, month, time) => {
+    return await axios.get('http://localhost:4000/items/search-bugs', {
+        params: {
+            hemisphere: hemisphere,
+            month: month,
+            time: time,
+        }
+    })
+    .then((bugs) => bugs)
+    .catch(function(error) {
+        console.log(error);
+    })
+}
+
+const findAvailableSeaCreatures = async (hemisphere, month, time) => {
+    return await axios.get('http://localhost:4000/items/search-seas', {
+        params: {
+            hemisphere: hemisphere,
+            month: month,
+            time: time,
+        }
+    })
+    .then((seas) => seas)
+    .catch(function(error) {
+        console.log(error);
+    })
+}
+
 export default {
     getItemById,
     getItemsBySearchString,
     findAvailableFish,
+    findAvailableBugs,
+    findAvailableSeaCreatures,
 }

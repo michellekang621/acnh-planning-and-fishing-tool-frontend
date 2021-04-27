@@ -30,6 +30,11 @@ const router = new VueRouter({
   base: '/',
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: home,
+    },
+    {
       path: '/home',
       name: 'home',
       component: home,
@@ -88,7 +93,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
-  store: store,
+  store,
   components: {
     App,
   },
