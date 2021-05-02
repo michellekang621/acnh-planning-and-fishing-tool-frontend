@@ -67,7 +67,6 @@
                   <div class="search-card-content-text">
                     <p>Name: {{ sea.item.name["name-USen"] }}</p>
                     <p>Sell Price: {{ sea.item.price }}</p>
-                    <p>Location: {{ sea.item.availability.location }}</p>
                   </div>
                   <img
                     @click="

@@ -113,7 +113,7 @@ export default {
     text-align: left;
 }
 
-.item-data {
+/* .item-data {
 
-}
+} */
 </style>

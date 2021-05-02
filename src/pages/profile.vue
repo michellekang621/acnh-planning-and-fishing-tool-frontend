@@ -7,7 +7,12 @@
     </div>
     <div class="split right">
         <div class="right-container">
-            <md-button @click="$router.push('goals-list')">Click to see your full list of goals!</md-button>
+            <div v-if="displayedGoals">
+                <div v-for="goal in displayedGoals" :key="goal._id">
+                    <md-button @click="$router.push(`/goal-details/${goal._id}`)">{{goal.title}}</md-button>
+                </div>
+            </div>
+            <h2 class="more-link" @click="$router.push('goals-list')">More...</h2>
         </div>
     </div>
 </div>
@@ -21,11 +26,18 @@ export default {
     computed: {
         ...mapState( 'user', {
             username: state => state.username,
+            goals: state => state.goals,
         }),
         printUsername() {
             return this.username;
-        }
-
+        },
+        displayedGoals() {
+            if (this.goals.length > 3) {
+                return this.goals.slice(0, 3);
+            } else {
+                return this.goals;
+            }
+        },
     }
     
 }
@@ -63,7 +75,19 @@ export default {
 }
 
 .right-container {
-    padding-top: 30%;
+    margin-top: 30%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: white;
+}
+
+.more-link {
+    cursor: pointer;
+    text-align: right;
 }
 
 </style>

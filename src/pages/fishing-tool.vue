@@ -178,7 +178,7 @@ export default {
 
 .search-card-container {
   margin-bottom: 5%;
-  padding-right: 3%;
+  /* padding-right: 3%; */
 }
 
 .search-card-content {
@@ -193,8 +193,9 @@ export default {
 }
 
 .img-sizer {
-  max-width: 30%;
-  max-height: 10%;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
   cursor: pointer;
 }
 </style>

@@ -72,6 +72,6 @@ export default {
 }
 
 .login-card {
-  background-color: lightseagreen;
+  background-color: #afdbda;
 }
 </style>
