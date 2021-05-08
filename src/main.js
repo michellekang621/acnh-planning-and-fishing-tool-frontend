@@ -16,7 +16,6 @@ import bugsTool from './pages/bugs-tool';
 import seaCreaturesTool from './pages/sea-creatures-tool';
 import itemDetails from './pages/item-details';
 import goalDetails from './pages/goal-details';
-import goalsList from './pages/goals-list';
 import searchItems from './pages/search-items';
 
 Vue.config.productionTip = false
@@ -68,11 +67,6 @@ const router = new VueRouter({
       path: '/sea-creatures-tool',
       name: 'sea-creatures-tool',
       component: seaCreaturesTool,
-    },
-    {
-      path: '/goals-list',
-      name: 'goals-list',
-      component: goalsList,
     },
     {
       path: '/item-details/:itemId',

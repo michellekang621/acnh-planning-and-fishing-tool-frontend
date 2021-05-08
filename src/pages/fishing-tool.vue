@@ -178,7 +178,6 @@ export default {
 
 .search-card-container {
   margin-bottom: 5%;
-  /* padding-right: 3%; */
 }
 
 .search-card-content {

@@ -2,9 +2,12 @@
   <div>
       <h2>Here's all your goals so far:</h2>
     <div class="goals-list-container" v-for="goal in goals" :key="goal._id">
-      <md-button class="goal" @click="$router.push(`/goal-details/${goal._id}`)">
+      <md-card class="goal">
+      <md-card-title>
         {{ goal.title }}
-      </md-button>
+        <md-button @click="$router.push(`/goal-details/${goal._id}`)">Edit</md-button>
+      </md-card-title>
+      </md-card>
     </div>
     <div class="add-goal-bar">
       <md-field class="add-goal-input">
@@ -42,10 +45,15 @@ export default {
 <style scoped>
 .goals-list-container {
     display: flex;
+    flex-direction: row;
 }
 
 .goal {
     width: 20%;
+    margin: 1%;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .add-goal-bar {
