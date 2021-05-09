@@ -58,10 +58,20 @@ const findAvailableSeaCreatures = async (hemisphere, month, time) => {
     })
 }
 
+// const findRandomVillager = async () => {
+//     return await axios.get('http://localhost:4000/items/random-villager')
+//     .then((villager) => console.log(villager))
+//     .catch(function(error) {
+//         console.log(error);
+//     })
+
+// }
+
 export default {
     getItemById,
     getItemsBySearchString,
     findAvailableFish,
     findAvailableBugs,
     findAvailableSeaCreatures,
+    // findRandomVillager,
 }

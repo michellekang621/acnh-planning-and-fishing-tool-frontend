@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
     <div class="search-input-container">
       <md-field>
         <label
@@ -105,14 +105,24 @@ export default {
 </script>
 
 <style scoped>
+.bg {
+    background-image: url('../assets/acnh.jpg');
+    background-size: cover;
+    background-position: bottom right;
+    height: 100%;
+
+}
+
 .search-input-container {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   width: 80%;
-  margin-left: 11%;
+  margin-left: 9%;
   margin-right: 5%;
   margin-top: 2%;
+  padding-left: 2%;
+  background-color: rgba(242, 233, 225, 0.8);
 }
 
 .search-button {

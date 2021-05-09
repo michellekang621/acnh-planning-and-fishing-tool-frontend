@@ -85,7 +85,7 @@ export default {
 /* Control the left side */
 .left {
   left: 0;
-  background-image: url("../assets/pattern-bgs/acnh-leaf-yellow.png");
+  background-image: url("../assets/acnh.jpg");
   background-position: center;
   background-size: cover;
   height: 100%;

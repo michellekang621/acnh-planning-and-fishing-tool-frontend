@@ -1,19 +1,27 @@
 <template>
-  <div>
-    <h2>
+  <div class="bg">
+    <h1 class="goal-title">
       {{ goal.title }}
-    </h2>
+    </h1>
     <div class="contents" v-for="content in goal.contents" :key="content._id">
       <md-card class="content-card-container">
         <md-card-header>
-          <div class="content-card">
-            <img class="img-sizer" :src="content.item.image_uri" />
-            <div class="content-card-text">
-            {{ content.item.name["name-USen"] }}
-            </div>
-            <div>
+          <div class="content-card-content"> 
+          <div class="content-card-content-text">
+            <p>Name: {{ content.item.name["name-USen"] }}</p>
+            <p>Type: {{ content.type }}</p>
+            <p
+              class="details-link"
+              @click="
+                $router.push({
+                  name: 'item-details',
+                  params: { itemId: content._id },
+                })
+              "
+            >
+              More Details...
+            </p>
             <md-button
-            class="delete-button"
               @click="
                 removeContentByGoal({
                   goalId: goal._id,
@@ -24,7 +32,25 @@
               Delete
             </md-button>
           </div>
-          </div>
+          <img
+                @click="
+                  $router.push({
+                    name: 'item-details',
+                    params: { itemId: content._id },
+                  })
+                "
+                class="img-sizer"
+                :src="content.item.image_uri"
+              />
+              </div>
+          <!-- <div class="content-card">
+            <img class="img-sizer" :src="content.item.image_uri" />
+            <div class="content-card-text">
+            {{ content.item.name["name-USen"] }}
+            </div>
+            <div>
+
+          </div> -->
         </md-card-header>
       </md-card>
     </div>
@@ -53,35 +79,60 @@ export default {
 </script>
 
 <style scoped>
+.bg {
+    background-image: url('../assets/acnh.jpg');
+    background-size: cover;
+    background-position: bottom right;
+    height: 100%;
+
+}
+
+.goal-title {
+  margin-top: 5%;
+  text-align: left;
+  margin-left: 10%;
+}
+
 .contents {
-  padding: 5%;
-  padding-top: 15%;
+  padding: 2%;
+  /* padding-top: 15%; */
 }
 
 .content-card-container {
-  margin-bottom: 5%;
-  /* padding-right: 3%; */
+    background-color: #f2e9e1;
+  width: 80%;
+  margin-left: 8%;
+  margin-bottom: 2%;
+  padding-right: 2%;
+  padding-left: 5%;
 }
 
-.content-card {
+.content-card-content {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 
-.content-card-text {
+.content-card-content-text {
   text-align: left;
-  padding: 5%;
 }
+
+.details-link {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.img-sizer {
+  max-width: 13em;
+  cursor: pointer;
+}
+
 
 .img-sizer {
   max-width: 150px;
   width: 100%;
   height: auto;
   cursor: pointer;
-}
-
-.delete-button {
-  justify-self: right;
 }
 </style>

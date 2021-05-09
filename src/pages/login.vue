@@ -2,7 +2,7 @@
 <div class="bg">
   <div class="card-container">
     <md-card class="login-card">
-      <md-card-header> Login </md-card-header>
+      <h2 class="card-header">Login</h2>
       <md-card-content>
         <md-field>
           <label>Email</label>
@@ -17,7 +17,7 @@
         <md-button class="md-raised" @click="login()">Login</md-button>
       </md-card-content>
     </md-card>
-    <p class="sign-up-link">First time here? Click here to sign up</p>
+    <p class="sign-up-link" @click="$router.push({name: 'register'}).catch(err => {})" >First time here? Click here to sign up</p>
   </div>
 </div>
 </template>
@@ -57,14 +57,14 @@ export default {
 <style scoped>
 /* Control the left side */
 .bg {
-    background-image: url('../assets/pattern-bgs/acnh-leaf-teal.png');
-    background-position: top;
+    background-image: url('../assets/acnh.jpg');
     background-size: cover;
+        background-position: bottom;
     height: 100%;
 }
 
 .card-container {
-  padding-top: 10%;
+  padding-top: 8%;
   display: flex;
   flex-direction: column;
   width: 40%;
@@ -72,6 +72,17 @@ export default {
 }
 
 .login-card {
-  background-color: #afdbda;
+  background-color: #ebdacc;
+}
+
+.card-header {
+  text-align: left;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.sign-up-link {
+  cursor: pointer;
+  margin-left: 19em;
 }
 </style>

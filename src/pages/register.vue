@@ -3,56 +3,65 @@
     <div class="split left"></div>
     <div class="split right">
       <div class="card-container">
-    <md-card class="register-card">
-      <md-card-header> Register </md-card-header>
-      <md-card-content>
-          <md-field>
-          <label>Username</label>
-          <md-input v-model="username"></md-input>
-          <span class="md-helper-text">8 character minimum</span>
-        </md-field>
-        <md-field>
-          <label>Email</label>
-          <md-input v-model="email"></md-input>
-          <span class="md-helper-text">8 character minimum</span>
-        </md-field>
-        <md-field>
-          <label>Password</label>
-          <md-input v-model="password" type="password"></md-input>
-          <span class="md-helper-text">8 character minimum</span>
-        </md-field>
-        <md-button class="md-raised" v-on:click="register()">Register</md-button>
-      </md-card-content>
-    </md-card>
-    <p>Been here before? Click here to Sign in</p>
+        <md-card class="register-card">
+          <h2 class="card-header">Register</h2>
+          <md-card-content>
+            <md-field>
+              <label>Username</label>
+              <md-input v-model="username"></md-input>
+              <span class="md-helper-text">8 character minimum</span>
+            </md-field>
+            <md-field>
+              <label>Email</label>
+              <md-input v-model="email"></md-input>
+              <span class="md-helper-text">8 character minimum</span>
+            </md-field>
+            <md-field>
+              <label>Password</label>
+              <md-input v-model="password" type="password"></md-input>
+              <span class="md-helper-text">8 character minimum</span>
+            </md-field>
+            <md-button class="md-raised" v-on:click="register()"
+              >Register</md-button
+            >
+          </md-card-content>
+        </md-card>
+        <p
+          class="sign-in-link"
+          @click="$router.push({ name: 'login' }).catch((err) => {})"
+        >
+          Been here before? Click here to sign in
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
+import axios from "axios";
 
 export default {
   name: "navbar",
   data: () => ({
-      username: '',
-      email: '',
-      password: '',
+    username: "",
+    email: "",
+    password: "",
   }),
   methods: {
-      async register() {
-          const config = {headers: {'Content-Type': 'application/json'}}
-          const formData = {'username': this.username, 'email': this.email, 'password': this.password};
-          await axios.post('http://localhost:4000/auth/register', formData, config);
-      }
-  }
+    async register() {
+      const config = { headers: { "Content-Type": "application/json" } };
+      const formData = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      await axios.post("http://localhost:4000/auth/register", formData, config);
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 /* Split the screen in half */
 .split {
   height: 100%;
@@ -67,8 +76,8 @@ export default {
 /* Control the left side */
 .left {
   left: 0;
-  background-image: url('../assets/pattern-bgs/acnh-leaf-cream-green.png');
-  background-position: center;
+  background-image: url("../assets/acnh.jpg");
+  background-position: bottom right;
   background-size: cover;
   height: 100%;
 }
@@ -76,19 +85,26 @@ export default {
 /* Control the right side */
 .right {
   right: 0;
-    background-color: lightyellow;
-
+  background-color: #ebdacc;
 }
 
 .register-card {
   width: 75%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .card-container {
-  padding-top: 20%;
+  padding-top: 25%;
   padding-left: 20%;
 }
 
+.card-header {
+  text-align: left;
+  margin-left: 1em;
+}
+
+.sign-in-link {
+  cursor: pointer;
+}
 </style>

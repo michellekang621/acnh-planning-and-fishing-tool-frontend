@@ -134,17 +134,18 @@ export default {
 /* Control the left side */
 .left {
   left: 0;
-  background-image: url("../assets/pattern-bgs/acnh-cream.png");
+  background-color: #ebdacc;
+  /* background-image: url("../assets/acnh.jpg");
   background-position: center;
   background-size: cover;
-  height: 100%;
+  height: 100%; */
 }
 
 /* Control the right side */
 .right {
   right: 0;
-  background-image: url("../assets/pattern-bgs/acnh-cream.png");
-  background-position: center;
+  background-image: url("../assets/acnh.jpg");
+  background-position: bottom right;
   background-size: cover;
   height: 100%;
 }

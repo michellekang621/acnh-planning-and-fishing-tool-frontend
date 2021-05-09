@@ -1,5 +1,5 @@
 <template>
-    <md-toolbar>
+    <md-toolbar class="md-dense">
             <div v-if='loggedIn'>
                 <md-button @click="$router.push({name: 'profile'}).catch(err => {})">Profile</md-button>
                 <md-button @click="$router.push({name: 'search-items'}).catch(err => {})">Browse</md-button>
@@ -39,7 +39,4 @@ export default {
 </script>
 
 <style scoped>
-.right {
-    /* align-self: right; */
-}
 </style>

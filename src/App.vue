@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="container">
     <navbar />
-    <div class="content">
-    <router-view :key="$route.path"/>
-    </div>
+    <!-- <div class="content"> -->
+    <router-view class="content" :key="$route.path"/>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,6 +28,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
+  /* font-family: 'Itim'; */
   /* margin-top: 60px; */
 }
 
