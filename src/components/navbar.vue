@@ -10,6 +10,7 @@
             </div>
             <div v-else>
                 <md-button @click="$router.push({name: 'home'}).catch(err => {})">Home</md-button>
+                <md-button @click="$router.push({name: 'search-items-guest'}).catch(err => {})">Browse</md-button>
                 <md-button @click="$router.push({name: 'fishing-tool'})">Fishing Tool</md-button>
                 <md-button @click="$router.push({name: 'bugs-tool'}).catch(err => {})">Bugs Tool</md-button>
                 <md-button @click="$router.push({name: 'sea-creatures-tool'}).catch(err => {})">Sea Creatures Tool</md-button>

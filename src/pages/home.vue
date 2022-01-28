@@ -11,6 +11,13 @@
     <div class="left-text tools">
       <div
         class="tool-card"
+        @click="$router.push({ name: 'search-items-guest' }).catch((err) => {})"
+      >
+        <magnifyIcon class="tool-icon" />
+        <h2 class="tool-label">Search</h2>
+      </div>
+      <div
+        class="tool-card"
         @click="$router.push({ name: 'fishing-tool' }).catch((err) => {})"
       >
         <fishIcon class="tool-icon" />
@@ -50,6 +57,7 @@
 </template>
 
 <script>
+import magnifyIcon from "../assets/icons/magnify.vue";
 import fishIcon from "../assets/icons/fish.vue";
 import seaIcon from "../assets/icons/sea-creatures.vue";
 import bugIcon from "../assets/icons/bug.vue";
@@ -58,6 +66,7 @@ import calculatorIcon from "../assets/icons/calculator.vue";
 export default {
   name: "home",
   components: {
+    magnifyIcon,
     fishIcon,
     seaIcon,
     bugIcon,
@@ -107,7 +116,7 @@ export default {
 .tool-card {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 17%;
   cursor: pointer;
   text-align: center;
   background-color: rgba(180, 180, 180, 0.5);
