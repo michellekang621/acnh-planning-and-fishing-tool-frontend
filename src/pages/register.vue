@@ -55,7 +55,9 @@ export default {
         email: this.email,
         password: this.password,
       };
-      await axios.post("http://localhost:4000/auth/register", formData, config);
+      // const baseUrl = 'http://localhost:4000'
+      const baseUrl = 'https://acnh-tool-backend.herokuapp.com'
+      await axios.post(`${baseUrl}/auth/register`, formData, config);
     },
   },
 };

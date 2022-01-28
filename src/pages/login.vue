@@ -40,7 +40,9 @@ export default {
       async login() {
           const config = {headers: {'Content-Type': 'application/json'}}
           const formData = {'email': this.email, 'password': this.password};
-          await axios.post('http://localhost:4000/auth/login', formData, config)
+          // const baseUrl = 'http://localhost:4000'
+          const baseUrl = 'https://acnh-tool-backend.herokuapp.com'
+          await axios.post(`${baseUrl}/auth/login`, formData, config)
           .then((response) => {
             this.token = response.data;
             this.setUserByToken(this.token.token);
