@@ -1,7 +1,8 @@
 import axios from 'axios';
+import env from '../environment/envConfig';
 
 const getItemById = async (id) => {
-    return await axios.get(`http://localhost:4000/items/${id}`)
+    return await axios.get(`${env.baseUrl}/items/${id}`)
     .then((item) => item)
     .catch(function(error) {
         console.log(error);
@@ -9,7 +10,7 @@ const getItemById = async (id) => {
 }
 
 const getItemsBySearchString = async (searchString) => {
-    return await axios.get(`http://localhost:4000/items/search-items?searchString=${searchString}`)
+    return await axios.get(`${env.baseUrl}/items/search-items?searchString=${searchString}`)
     .then((items) => items)
     .catch(function(error) {
         console.log(error);
@@ -17,7 +18,7 @@ const getItemsBySearchString = async (searchString) => {
 }
 
 const findAvailableFish = async (hemisphere, month, time) => {
-    return await axios.get('http://localhost:4000/items/search-fish', {
+    return await axios.get(`${env.baseUrl}/items/search-fish`, {
         params: {
             hemisphere: hemisphere,
             month: month,
@@ -31,7 +32,7 @@ const findAvailableFish = async (hemisphere, month, time) => {
 }
 
 const findAvailableBugs = async (hemisphere, month, time) => {
-    return await axios.get('http://localhost:4000/items/search-bugs', {
+    return await axios.get(`${env.baseUrl}/items/search-bugs`, {
         params: {
             hemisphere: hemisphere,
             month: month,
@@ -45,7 +46,7 @@ const findAvailableBugs = async (hemisphere, month, time) => {
 }
 
 const findAvailableSeaCreatures = async (hemisphere, month, time) => {
-    return await axios.get('http://localhost:4000/items/search-seas', {
+    return await axios.get(`${env.baseUrl}/items/search-seas`, {
         params: {
             hemisphere: hemisphere,
             month: month,
@@ -59,7 +60,7 @@ const findAvailableSeaCreatures = async (hemisphere, month, time) => {
 }
 
 // const findRandomVillager = async () => {
-//     return await axios.get('http://localhost:4000/items/random-villager')
+//     return await axios.get(`${env.baseUrl}/items/random-villager`)
 //     .then((villager) => console.log(villager))
 //     .catch(function(error) {
 //         console.log(error);

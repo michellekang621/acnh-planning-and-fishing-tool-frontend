@@ -1,7 +1,4 @@
-const env = {
-    local: 'http://localhost:8080',
-}
-
-export default {
-    local: local,
+export const env = {
+    // baseUrl: 'http://localhost:4000',
+    baseUrl: 'https://acnh-tool-backend.herokuapp.com'
 }
