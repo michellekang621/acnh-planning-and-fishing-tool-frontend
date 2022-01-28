@@ -40,7 +40,8 @@
           >
             <h2>{{ goal.title }}</h2>
             <div>
-              <editIcon class="icon" @click="$router.push(`/goal-details/${goal._id}`)" />
+              <!-- <editIcon class="icon" @click="$router.push({ name: 'goal-details', params: { goalId: goal._id }})" /> -->
+              <editIcon class="icon" @click="editClicked()" />
               <deleteIcon class="icon" />
             </div>
           </md-card>
@@ -88,6 +89,10 @@ export default {
     async addGoal() {
       this.addGoalByUser(this.newGoal);
     },
+    editClicked() {
+      // this.$router.push({ name: 'goal-details', params: { goalId: goalId }})
+      console.log('edit clicked!')
+    }
   },
 };
 </script>
@@ -154,7 +159,9 @@ export default {
   padding-left: 4%;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
+
 
 .icon {
   color: rgba(120, 120, 120, 0.5);

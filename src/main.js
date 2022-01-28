@@ -75,6 +75,7 @@ const router = new VueRouter({
     },
     {
       path: '/goal-details/:goalId',
+      name: 'goal-details',
       component: goalDetails,
     },
     {
