@@ -1,5 +1,9 @@
 import axios from 'axios';
-import env from '../environment/envConfig';
+
+const env = {
+    // baseUrl: 'http://localhost:4000'
+    baseUrl: 'https://acnh-tool-backend.herokuapp.com'
+}
 
 const getItemById = async (id) => {
     return await axios.get(`${env.baseUrl}/items/${id}`)
