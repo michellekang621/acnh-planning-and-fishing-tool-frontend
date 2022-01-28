@@ -57,7 +57,19 @@ export default {
       };
       // const baseUrl = 'http://localhost:4000'
       const baseUrl = 'https://acnh-tool-backend.herokuapp.com'
-      await axios.post(`${baseUrl}/auth/register`, formData, config);
+      await axios.post(`${baseUrl}/auth/register`, formData, config)
+      .then(() => {
+        let formData = {'email': this.email, 'password': this.password};
+        await axios.post(`${baseUrl}/auth/login`, formData, config)
+        .then((response) => {
+          this.token = response.data;
+          this.setUserByToken(this.token.token);
+          this.$router.push('profile');
+        })
+        .catch(function(error) {
+          return error;
+        });
+      });
     },
   },
 };
