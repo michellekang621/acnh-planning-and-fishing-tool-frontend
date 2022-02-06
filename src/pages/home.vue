@@ -37,7 +37,9 @@
         <bugIcon class="tool-icon" />
         <h2 class="tool-label">Bugs</h2>
       </div>
-      <div class="tool-card">
+      <div 
+        class="tool-card"
+        @click="$router.push({name: 'items-calculator'}).catch((err) => {})">
         <calculatorIcon class="tool-icon" />
         <h2 class="tool-label">Items Calculator</h2>
       </div>
