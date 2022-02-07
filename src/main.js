@@ -15,7 +15,6 @@ import fishingTool from './pages/fishing-tool';
 import bugsTool from './pages/bugs-tool';
 import seaCreaturesTool from './pages/sea-creatures-tool';
 import itemsCalculator from './pages/items-calculator';
-import itemDetails from './pages/item-details';
 import goalDetails from './pages/goal-details';
 import searchItems from './pages/search-items';
 import searchItemsGuest from './pages/search-items-guest';
@@ -74,11 +73,6 @@ const router = new VueRouter({
       path: '/items-calculator',
       name: 'items-calculator',
       component: itemsCalculator,
-    },
-    {
-      path: '/item-details/:itemId',
-      name: 'item-details',
-      component: itemDetails,
     },
     {
       path: '/goal-details/:goalId',

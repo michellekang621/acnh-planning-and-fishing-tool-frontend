@@ -90,7 +90,7 @@ import itemsDb from "../api/items-db";
 import * as utils from '../environment/utils';
 
 export default {
-  name: "search-items",
+  name: "search-items-guest",
   data: () => ({
     searchString: "",
     searchResults: [],
