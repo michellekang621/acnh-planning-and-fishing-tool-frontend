@@ -25,6 +25,8 @@
             <p v-if="item.source"><b>Source:</b> {{item.source}}</p>
             <p v-if="item['buy-price']"><b>Buy Price:</b> {{item['buy-price']}}</p>
             <p v-if="item['sell-price']"><b>Sell Price:</b> {{item['sell-price']}}</p>
+            <p v-if="item['color-1']"><b>Primary Color:</b> {{item['color-1']}}</p>
+            <p v-if="item['color-2']"><b>Secondary Color:</b> {{item['color-2']}}</p>
             </div>
 
             <!-- Villagers -->

@@ -17,21 +17,17 @@
         <md-card class="search-card-container">
           <md-card-header>
             <div class="search-card-content">
-              <div class="search-card-content-text">
-                <p>Name: {{ item.item.name["name-USen"] }}</p>
-                <p>Type: {{ item.type }}</p>
-                <p class="details-link" @click="$router.push({name: 'item-details', params: { itemId: item._id }})">More Details...</p>
+              <div class="search-card-details">
+                <img @click="$router.push({name: 'item-details', params: { itemId: item._id }})"
+                  class="img-sizer"
+                  :src="item.item.image_uri"
+                />
+                <div class="search-card-content-text">
+                  <p><b>Name:</b> {{ item.item.name["name-USen"] }}</p>
+                  <p><b>Type:</b> {{ item.type }}</p>
+                </div>
               </div>
-              <img
-                @click="
-                  $router.push({
-                    name: 'item-details',
-                    params: { itemId: item._id },
-                  })
-                "
-                class="img-sizer"
-                :src="item.item.image_uri"
-              />
+                <p class="details-link" @click="$router.push({name: 'item-details', params: { itemId: item._id }})">More Details...</p>
             </div>
           </md-card-header>
         </md-card>
@@ -98,7 +94,7 @@ export default {
   margin-left: 8%;
   margin-bottom: 2%;
   padding-right: 2%;
-  padding-left: 5%;
+  padding-left: 2%;
   /* padding: 2%; */
 }
 
@@ -108,8 +104,16 @@ export default {
   justify-content: space-between;
 }
 
+.search-card-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .search-card-content-text {
   text-align: left;
+  font-size: 1em;
+  line-height: .5em;
+  margin-left: 1em;
 }
 
 .details-link {
@@ -119,7 +123,7 @@ export default {
 }
 
 .img-sizer {
-  max-width: 13em;
+  max-height: 5em;
   cursor: pointer;
 }
 

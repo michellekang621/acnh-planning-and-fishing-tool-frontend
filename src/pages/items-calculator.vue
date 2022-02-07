@@ -3,9 +3,13 @@
     <div class="split left">
       <div class="search-input-container">
         <md-field>
-          <md-textarea md-autogrow v-model="searchString"></md-textarea>
+          <md-textarea
+            md-autogrow
+            v-model="searchString"
+            @keyup.enter="searchItems"
+          ></md-textarea>
         </md-field>
-        <md-button class="search-button" @click="searchItems()">
+        <md-button class="search-button" @click="searchItems">
           Search
         </md-button>
       </div>
@@ -14,25 +18,26 @@
           <md-card class="search-card-container">
             <md-card-header>
               <div class="search-card-content">
-                <div class="search-card-content-text">
-                  <p>Name: {{ item.item.name["name-USen"] }}</p>
-                  <div>
-                    <plusIcon />
+                <div class="search-card-details">
+                  <div v-on:click="addToTotal(item)" class="plus-icon">
+                    <plusCircleIcon />
                   </div>
-                  <p
-                    class="details-link"
-                    @click="$router.push({name: 'item-details', params: { itemId: item._id }})"
-                  >
-                    More Details...
-                  </p>
+                  <div class="search-card-content-text">
+                    <p><b>Name:</b> {{ item.item.name["name-USen"] }}</p>
+                      <p><b>Price: </b> 
+                      <span v-if='item.item["buy-price"]'>{{ item.item["buy-price"] }} bells</span>
+                      <span v-else>0 bells</span>
+                    </p>
+                    <p
+                      class="details-link"
+                      @click="$router.push({name: 'item-details', params: { itemId: item._id }})"
+                    >
+                      More Details...
+                    </p>
+                  </div>
                 </div>
                 <img
-                  @click="
-                    $router.push({
-                      name: 'item-details',
-                      params: { itemId: item._id },
-                    })
-                  "
+                  @click="$router.push({ name: 'item-details', params: { itemId: item._id }})"
                   class="img-sizer"
                   :src="item.item.image_uri"
                 />
@@ -43,24 +48,52 @@
       </ul>
     </div>
     <div class="split right">
-      
+      <div class="calculations-container">
+        <div class="calculations-display">
+          <p><b>Total:</b></p>
+          <p>{{ total }} bells</p>
+        </div>
+        <ul>
+          <div v-for="item in selectedItems" :key="item._id">
+            <md-card class="search-card-container">
+              <md-card-header>
+                <div class="search-card-content">
+                  <div class="search-card-content-text">
+                    <p><b>Name:</b> {{ item.item.name["name-USen"] }}</p>
+                    <p><b>Price: </b> 
+                      <span v-if='item.item["buy-price"]'>{{ item.item["buy-price"] }} bells</span>
+                      <span v-else>0 bells</span>
+                    </p>
+                  </div>
+                  <img
+                    @click="$router.push({name: 'item-details', params: { itemId: item._id }})"
+                    class="img-sizer-right"
+                    :src="item.item.image_uri"
+                  />
+                </div>
+              </md-card-header>
+            </md-card>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import itemsDb from "../api/items-db";
-import plusIcon from "../assets/icons/plus.vue";
+import plusCircleIcon from "../assets/icons/plusCircle.vue";
 
 export default {
   name: "items-calculator",
   components: {
-    plusIcon,
+    plusCircleIcon,
   },
   data: () => ({
     searchString: "",
     searchResults: [],
-    selectedValue: "",
+    selectedItems: [],
+    total: 0,
   }),
   async beforeMount() {
     await itemsDb
@@ -76,6 +109,12 @@ export default {
         this.searchResults = items.data;
       });
       this.$router.push(`items-calculator?searchString=${this.searchString}`);
+    },
+    addToTotal: function (item) {
+      if (item.item["buy-price"]) {
+        this.total += item.item["buy-price"];
+      }
+      this.selectedItems.push(item);
     },
   },
 };
@@ -128,6 +167,10 @@ export default {
   margin-top: 4%;
 }
 
+.md-card-header {
+  padding: .5em;
+}
+
 .search-card-container {
   width: 80%;
   margin-left: 8%;
@@ -135,7 +178,7 @@ export default {
   margin-bottom: 2%;
   margin-top: 2%;
   padding-right: 5%;
-  padding-left: 5%;
+  padding-left: 2%;
   /* padding: 2%; */
 }
 
@@ -143,10 +186,22 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  line-height: .5em;
+}
+
+.search-card-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.plus-icon {
+  margin-top: 1.75em;
+  margin-right: 1em;
 }
 
 .search-card-content-text {
   text-align: left;
+  font-size: 1em;
 }
 
 .details-link {
@@ -156,8 +211,32 @@ export default {
 }
 
 .img-sizer {
-  max-height: 7em;
+  max-height: 5em;
   cursor: pointer;
-  margin-top: 2%;
+  margin-top: .5%;
+}
+
+.img-sizer-right {
+  max-height: 5em;
+  cursor: pointer;
+}
+
+/* .plus-icon {
+  fill: rgba(180, 180, 180, 0.5);
+} */
+
+/* .plus-icon:hover {
+  color: rgba(126, 109, 109, 0.5);
+} */
+
+.calculations-container {
+  margin-top: 10%;
+}
+
+.calculations-display {
+  display: flex;
+  justify-content: space-between;
+  margin: 5% 5% 2%;
+  font-size: 2em;
 }
 </style>
