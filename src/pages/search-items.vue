@@ -137,7 +137,6 @@ export default {
       await itemsDb.getItemsBySearchString(this.searchString).then((items) => { this.searchResults = items.data; });
       this.$router.push(`search-items?searchString=${this.searchString}`);
     },
-  },
   updateSelectedItem(item) {
     this.selectedItem = item.item;
     this.selectedItemType = item.type;
@@ -148,6 +147,7 @@ export default {
   isCreature() { return this.selectedItemType === "fish" || this.selectedItemType === "sea" || this.selectedItemType === "bug"; },
   isItem() { return this.selectedItemType === "fossil" || this.selectedItemType === "houseware" || this.selectedItemType === "wallmounted" || this.selectedItem.type === "misc"; },
   isVillager() { return this.selectedItemType === "villager"; }
+},
 };
 </script>
 

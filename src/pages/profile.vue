@@ -3,35 +3,10 @@
     <div class="split left">
       <div class="left-container">
         <h1>Welcome {{ this.username }}!</h1>
-        <p>You can either edit your list of goals to the right,</p>
-        <p>Or you can search for more items here!</p>
-        <md-button
-          @click="$router.push({ name: 'search-items' }).catch((err) => {})"
-          >Search Items!</md-button
-        >
-        <p>
-          Or, if you're looking for information on creatures you can catch right
-          now, feel free to use any of the tools below!
-        </p>
-        <md-button
-          @click="$router.push({ name: 'fishing-tool' }).catch((err) => {})"
-          >Fishing</md-button
-        >
-        <md-button
-          @click="$router.push({ name: 'bugs-tool' }).catch((err) => {})"
-          >Bugs</md-button
-        >
-        <md-button
-          @click="
-            $router.push({ name: 'sea-creatures-tool' }).catch((err) => {})
-          "
-          >Sea Creatures</md-button
-        >
+        <p>You can either edit your list of goals here,</p>
+        <p>Or you can see details about each of them to the right!</p>
       </div>
-    </div>
-    <div class="split right">
-      <md-toolbar md-elevation="0" class="right-header-container"><h2 class="right-header">Here's your full list of goals:</h2></md-toolbar>
-      <div class="right-container">
+      <div class="user-goal-list">
         <div v-if="goals">
           <md-card
             v-for="goal in goals"
@@ -39,23 +14,76 @@
             class="goal-card-container"
           >
             <h2>{{ goal.title }}</h2>
-            <div>
-              <!-- <editIcon class="icon" @click="$router.push({ name: 'goal-details', params: { goalId: goal._id }})" /> -->
-              <editIcon class="icon" @click="editClicked()" />
-              <deleteIcon class="icon" />
+            <div class="goal-card-icons">
+              <span @click="seeGoalDetails(goal)"><editIcon class="icon"/></span>
+              <!-- will do this once i can update backend -->
+              <!-- <span @click="deleteGoal(goal)"><deleteIcon class="icon" /></span> -->
             </div>
           </md-card>
         </div>
       </div>
       <div class="right-bottom-container">
-          <md-field class="add-goal-input">
-            <label>Add a new goal here!</label>
-            <md-textarea md-autogrow v-model="newGoal"></md-textarea>
-          </md-field>
-          <md-button @click="addGoal()" class="add-goal-button"
-            >Add Goal!</md-button
-          >
-        </div>
+        <md-field class="add-goal-input">
+          <label>Add a new goal here!</label>
+          <md-textarea md-autogrow v-model="newGoal"></md-textarea>
+        </md-field>
+        <md-button @click="addGoal()" class="add-goal-button"
+          >Add Goal!</md-button
+        >
+      </div>
+    </div>
+    <div class="split right">
+      <div v-if="selectedGoal" class="goals-list">
+      <h1 class="goal-title">
+      {{ selectedGoal.title }}
+      </h1>
+      <div class="contents" v-for="content in selectedGoal.contents" :key="content._id">
+        <md-card class="content-card-container">
+          <md-card-header>
+            <div class="content-card-content"> 
+            <div class="content-card-content-text">
+              <p>Name: {{ content.item.name["name-USen"] }}</p>
+              <p>Type: {{ content.type }}</p>
+              <!-- TODO: NEED TO ADD BACK MORE DETAILS PAGE -->
+              <!-- <p
+                class="details-link"
+                @click="
+                  $router.push({
+                    name: 'item-details',
+                    params: { itemId: content._id },
+                  })
+                "
+              >
+                More Details...
+              </p> -->
+              <!-- TODO: ADD DELETION FUNCTIONALITY -->
+              <!-- <md-button @click="updateGoalDetails(content)">
+                Delete
+              </md-button> -->
+            </div>
+            <img
+                  @click="
+                    $router.push({
+                      name: 'item-details',
+                      params: { itemId: content._id },
+                    })
+                  "
+                  class="img-sizer"
+                  :src="content.item.image_uri"
+                />
+                </div>
+            <!-- <div class="content-card">
+              <img class="img-sizer" :src="content.item.image_uri" />
+              <div class="content-card-text">
+              {{ content.item.name["name-USen"] }}
+              </div>
+              <div>
+
+            </div> -->
+          </md-card-header>
+        </md-card>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,16 +91,18 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import editIcon from "../assets/icons/edit.vue";
-import deleteIcon from "../assets/icons/delete.vue";
+// import deleteIcon from "../assets/icons/delete.vue";
 
 export default {
   name: "profile",
   data: () => ({
     newGoal: null,
+    selectedGoal: null,
+    selectedGoalList: [],
   }),
   components: {
     editIcon,
-    deleteIcon
+    // deleteIcon
   },
   computed: {
     ...mapState("user", {
@@ -85,14 +115,25 @@ export default {
     },
   },
   methods: {
-    ...mapActions("user", ["addGoalByUser"]),
+    ...mapActions("user", ["addGoalByUser", "removeContentByGoal"]),
     async addGoal() {
       this.addGoalByUser(this.newGoal);
     },
-    editClicked() {
-      // this.$router.push({ name: 'goal-details', params: { goalId: goalId }})
-      console.log('edit clicked!')
-    }
+    seeGoalDetails(goal) {
+      // this.$router.push({ name: "goal-details", params: { goalId: goalId } });
+      this.selectedGoal = goal;
+      this.selectedGoalList = goal.contents;
+    },
+    updateGoalDetails(content) {
+      const goalId = this.selectedGoal._id;
+      this.removeContentByGoal({ goalId: this.selectedGoal._id, contentId: content._id });
+      this.selectedGoal = this.getGoalById(goalId);
+      this.selectedGoalList = this.selectedGoal.contents; 
+    },
+    deleteGoal(goal) {
+      // placeholder
+      return goal;
+    },
   },
 };
 </script>
@@ -124,12 +165,12 @@ export default {
 }
 
 .left-container {
-  padding-top: 30%;
+  padding-top: 5em;
   padding-left: 5%;
   padding-right: 5%;
 }
 
-.right-container {
+.user-goal-list {
   /* margin-top: 3%; */
   /* padding-top: 5%; */
   padding-left: 5%;
@@ -137,7 +178,6 @@ export default {
   padding-bottom: 2%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 25%;
   /* background-color: white; */
 }
 
@@ -145,8 +185,8 @@ export default {
   margin-top: 4%;
   background-color: rgba(242, 233, 225, 0.8);
   position: fixed;
-    left: 50%;
-    right: 0;
+  left: 50%;
+  right: 0;
 }
 
 .right-header {
@@ -159,9 +199,13 @@ export default {
   padding-left: 4%;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
 }
 
+.goal-card-icons {
+  display: flex;
+  margin-top: 1em;
+  margin-right: 1em;
+}
 
 .icon {
   color: rgba(120, 120, 120, 0.5);
@@ -191,5 +235,54 @@ export default {
 .more-link {
   cursor: pointer;
   text-align: right;
+}
+
+.goal-title {
+  margin-top: 3em;
+  text-align: left;
+  margin-left: 10%;
+}
+
+.contents {
+  padding: 2%;
+  /* padding-top: 15%; */
+}
+
+.content-card-container {
+    background-color: #f2e9e1;
+  width: 80%;
+  margin-left: 8%;
+  margin-bottom: 2%;
+  padding-right: 2%;
+  padding-left: 5%;
+}
+
+.content-card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content-card-content-text {
+  text-align: left;
+}
+
+.details-link {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.img-sizer {
+  max-width: 13em;
+  cursor: pointer;
+}
+
+
+.img-sizer {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
 }
 </style>

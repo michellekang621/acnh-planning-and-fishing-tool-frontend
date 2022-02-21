@@ -4,6 +4,7 @@
     <md-card class="login-card">
       <h2 class="card-header">Login</h2>
       <md-card-content>
+        <p v-if="this.errorMsg" class="error-msg"><i>Sorry! That username/email or password could not be found.</i></p>
         <md-field>
           <label>Email</label>
           <md-input v-model="email"></md-input>
@@ -32,26 +33,29 @@ export default {
       email: '',
       password: '',
       token: null,
+      errorMsg: false,
   }),
   methods: {
     ...mapActions('user', [
       'setUserByToken',
     ]),
-      async login() {
-          const config = {headers: {'Content-Type': 'application/json'}}
-          const formData = {'email': this.email, 'password': this.password};
-          // const baseUrl = 'http://localhost:4000'
-          const baseUrl = 'https://acnh-tool-backend.herokuapp.com'
-          await axios.post(`${baseUrl}/auth/login`, formData, config)
-          .then((response) => {
-            this.token = response.data;
-            this.setUserByToken(this.token.token);
-            this.$router.push('profile');
-          })
-          .catch(function(error) {
-            return error;
-          });
-      },
+    async login() {
+      const app = this;
+        const config = {headers: {'Content-Type': 'application/json'}}
+        const formData = {'email': this.email, 'password': this.password};
+        // const baseUrl = 'http://localhost:4000'
+        const baseUrl = 'https://acnh-tool-backend.herokuapp.com'
+        await axios.post(`${baseUrl}/auth/login`, formData, config)
+        .then((response) => {
+          this.token = response.data;
+          this.setUserByToken(this.token.token);
+          this.$router.push('profile');
+        })
+        .catch(function(error) {
+          app.errorMsg = true;
+          return error;
+        });
+    },
   }
 };
 </script>
@@ -81,6 +85,11 @@ export default {
   text-align: left;
   margin-left: 1em;
   margin-top: 1em;
+}
+
+.error-msg {
+  color: red;
+  margin: 0;
 }
 
 .sign-up-link {

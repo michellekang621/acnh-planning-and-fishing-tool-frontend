@@ -6,6 +6,7 @@
                 <md-button @click="$router.push({name: 'fishing-tool'}).catch(err => {})">Fishing Tool</md-button>
                 <md-button @click="$router.push({name: 'bugs-tool'}).catch(err => {})">Bugs Tool</md-button>
                 <md-button @click="$router.push({name: 'sea-creatures-tool'}).catch(err => {})">Sea Creatures Tool</md-button>
+                <md-button @click="$router.push({name: 'items-calculator'}).catch(err => {})">Items Calculator</md-button>
                 <md-button @click="logout(); $router.push({name: 'home'}).catch(err => {})">Log Out</md-button>
             </div>
             <div v-else>
@@ -14,6 +15,7 @@
                 <md-button @click="$router.push({name: 'fishing-tool'})">Fishing Tool</md-button>
                 <md-button @click="$router.push({name: 'bugs-tool'}).catch(err => {})">Bugs Tool</md-button>
                 <md-button @click="$router.push({name: 'sea-creatures-tool'}).catch(err => {})">Sea Creatures Tool</md-button>
+                <md-button @click="$router.push({name: 'items-calculator'}).catch(err => {})">Items Calculator</md-button>
                 <md-button @click="$router.push({name: 'login'}).catch(err => {})" class="right">Log In</md-button>
                 <md-button @click="$router.push({name: 'register'}).catch(err => {})" class="right">Register</md-button>
 
