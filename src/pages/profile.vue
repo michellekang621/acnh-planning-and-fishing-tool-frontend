@@ -61,13 +61,17 @@
                 Delete
               </md-button> -->
             </div>
-            <img
+            <!-- <img
                   @click="
                     $router.push({
                       name: 'item-details',
                       params: { itemId: content._id },
                     })
                   "
+                  class="img-sizer"
+                  :src="content.item.image_uri"
+                /> -->
+                 <img
                   class="img-sizer"
                   :src="content.item.image_uri"
                 />
